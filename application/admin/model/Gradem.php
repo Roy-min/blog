@@ -26,4 +26,14 @@ class Gradem extends Model
         }
         return $res;
     }
+
+    //获取分类信息
+    public function getAllData(){
+        return $this->select()->toArray();
+    }
+
+    //获取单条分类信息
+    public function getOneData($id){
+        return $this->find($id)->toArray();
+    }
 }

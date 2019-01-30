@@ -16,8 +16,12 @@ use app\admin\model\Gradem;
 
 class Grade extends Base
 {
+    //分类管理 页面显示 及数据渲染
     public function index()
     {
+        $grade=new Gradem;
+        $res=$grade->getAllData();
+        $this->assign('res',$res);
         return $this->fetch();
     }
 
@@ -28,7 +32,7 @@ class Grade extends Base
     {
 
     }
-
+    //添加分类
     public function save(Request $request)
     {
         $validate=validate('Cat');
@@ -43,10 +47,11 @@ class Grade extends Base
             return $this->error($res['msg'],'/admin/grade');
 //        if ($res['code']==10000) return $this->error($res['msg'],'/admin/grade');
     }
-
+    //编辑
     public function edit($id)
     {
-
+        $grade=new Gradem;
+        $res=$grade->getOneData($id);
     }
 
     public function update(Request $request,$id)
