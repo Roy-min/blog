@@ -28,3 +28,4 @@ Route::resource('admin/grade','admin/Grade');
 Route::resource('admin/picture','admin/Picture');
 //系统管理
 Route::resource('admin/system','admin/System');
+

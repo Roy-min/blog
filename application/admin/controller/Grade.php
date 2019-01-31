@@ -20,8 +20,8 @@ class Grade extends Base
     public function index()
     {
         $grade=new Gradem;
-        $res=$grade->getAllData();
-        $this->assign('res',$res);
+        $cats=$grade->getAllData();
+        $this->assign('cats',$cats);
         return $this->fetch();
     }
 
@@ -51,12 +51,23 @@ class Grade extends Base
     public function edit($id)
     {
         $grade=new Gradem;
-        $res=$grade->getOneData($id);
+        $cat=$grade->getOneData($id);
+        $cats=$grade->getAllData();
+        $this->assign('cat',$cat);
+        $this->assign('cats',$cats);
+        return $this->fetch('index');
     }
 
     public function update(Request $request,$id)
     {
-
+        $validate=validate('Cat');
+        if (!$validate->check($request->only(['cat_name','cat_desc','__token__']))) {
+            return $this->error($validate->getError(),'/admin/grade');
+        }
+         $grade=new Gradem;
+         $data=$request->only(['cat_name','cat_desc']);
+         $res=$grade->updateData($id,$data);
+         return $this->error($res['msg'],'/admin/grade');
     }
 
     public function delete($id)

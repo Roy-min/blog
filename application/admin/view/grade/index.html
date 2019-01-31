@@ -2,11 +2,16 @@
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 分类管理 <span class="c-gray en">&gt;</span> 分类管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<div class="text-c">
-		<form class="Huiform" method="post" action="{{:url('/admin/grade')}}">
+		{if isset($cat)}
+			<form class="Huiform" method="post" action="{{:url('/admin/grade/'.$cat.id)}}">
+			<input type="hidden" name="_method" value="PUT">
+		{else/}
+			<form class="Huiform" method="post" action="{{:url('/admin/grade')}}">
+		{/if}
 			{{:token()}}
-			<input type="text" placeholder="分类名称" name="cat_name" value="" class="input-text" style="width:120px">
-			<input type="text" placeholder="分类描述" name="cat_desc" value="" class="input-text" style="width:240px">
-			<button type="submit" class="btn btn-success" id="" name="" ><i class="Hui-iconfont">&#xe600;</i> 添加</button>
+			<input type="text" placeholder="分类名称" name="cat_name" value="{{$cat?$cat.cat_name:''}}" class="input-text" style="width:120px">
+			<input type="text" placeholder="分类描述" name="cat_desc" value="{{$cat?$cat.cat_desc:''}}" class="input-text" style="width:240px">
+			<button type="submit" class="btn btn-success" id="" name="" ><i class="Hui-iconfont">&#xe600;</i> {{$cat?'更新分类':'添加分类'}}</button>
 		</form>
 	</div>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
@@ -22,7 +27,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			{volist name="res" id="vo"}
+			{volist name="cats" id="vo"}
 				<tr class="text-c">
 					<td><input name="" type="checkbox" value=""></td>
 					<td>{{$i}}</td>

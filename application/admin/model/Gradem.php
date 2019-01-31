@@ -36,4 +36,14 @@ class Gradem extends Model
     public function getOneData($id){
         return $this->find($id)->toArray();
     }
+
+    //更新分类信息
+    public function updateData($id,$data){
+        if ($this->where('id',$id)->update($data)) {
+            $res=['code' => 10000, 'msg' => '更新成功'];
+        }else{
+            $res=['code' => 10001, 'msg' => '更新失败'];
+        }
+        return $res;
+    }
 }
