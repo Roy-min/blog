@@ -21,6 +21,8 @@ class Grade extends Base
     {
         $grade=new Gradem;
         $cats=$grade->getAllData();
+        $catCount=$grade->getCount();
+        $this->assign('catCount',$catCount);
         $this->assign('cats',$cats);
         return $this->fetch();
     }
@@ -43,9 +45,7 @@ class Grade extends Base
         $cat_desc =$request->param('cat_desc','trim');
         $grade=new Gradem;
         $res=$grade->addCat($cat_name,$cat_desc);
-//        if ($res['code']==10001)
             return $this->error($res['msg'],'/admin/grade');
-//        if ($res['code']==10000) return $this->error($res['msg'],'/admin/grade');
     }
     //编辑
     public function edit($id)
@@ -53,6 +53,8 @@ class Grade extends Base
         $grade=new Gradem;
         $cat=$grade->getOneData($id);
         $cats=$grade->getAllData();
+        $catCount=$grade->getCount();
+        $this->assign('catCount',$catCount);
         $this->assign('cat',$cat);
         $this->assign('cats',$cats);
         return $this->fetch('index');
@@ -72,6 +74,9 @@ class Grade extends Base
 
     public function delete($id)
     {
+        $grade=new Gradem;
+        $res=$grade->deleteData($id);
 
+        return $this->error($res['msg'],'/admin/grade');
     }
 }

@@ -46,4 +46,24 @@ class Gradem extends Model
         }
         return $res;
     }
+
+    //删除数据
+    public function deleteData($id)
+    {
+        if ($this->where('id',$id)->delete()){
+            $res=['code' => 10000, 'msg' => '删除成功'];
+        }else{
+            $res=['code' => 10001, 'msg' => '删除失败'];
+        }
+
+        return $res;
+    }
+
+    //获取数据总条数
+    public function getCount()
+    {
+        $res=$this->count();
+        return $res;
+    }
+
 }
