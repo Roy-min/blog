@@ -60,6 +60,9 @@ class Grade extends Base
         return $this->fetch('index');
     }
 
+    /**
+     * 更新分类信息
+     */
     public function update(Request $request,$id)
     {
         $validate=validate('Cat');
@@ -72,6 +75,9 @@ class Grade extends Base
          return $this->error($res['msg'],'/admin/grade');
     }
 
+    /*
+     * 删除分类数据
+     */
     public function delete($id)
     {
         $grade=new Gradem;

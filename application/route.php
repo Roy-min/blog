@@ -22,6 +22,7 @@ Route::get('admin/captcha','admin/Login/captcha');
 
 //文章管理 资源路由
 Route::resource('admin/article','admin/Article');
+
 //分类管理 资源路由
 Route::resource('admin/grade','admin/Grade');
 Route::get('admin/grade/del/:id','admin/Grade/delete');
@@ -30,3 +31,4 @@ Route::resource('admin/picture','admin/Picture');
 //系统管理
 Route::resource('admin/system','admin/System');
 
+Route::post('admin/upArtImg','admin/Upload/artUpload');
